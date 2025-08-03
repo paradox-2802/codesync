@@ -10,12 +10,16 @@ import { roomManager } from "./inMemorydb/roomManager.js";
 
 dotenv.config();
 
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(",")
+  : "*";
+  
 const app = express();
 const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
   },
   connectionStateRecovery: {
@@ -26,7 +30,7 @@ const io = new Server(server, {
 
 app.use(
   cors({
-    origin: "*",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
