@@ -26,7 +26,7 @@ const io = new Server(server, {
 
 app.use(
   cors({
-    origin: process.env.ALLOWED_ORIGINS?.split(",") || "*",
+    origin: "*",
     credentials: true,
   })
 );
