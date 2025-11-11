@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
 - Performance improvements
 - Error handling
 - Readability and maintainability
-
+- Return only the optimized code without any explanations or text.
 
 Original code:
 ${code}`;
