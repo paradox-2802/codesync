@@ -46,16 +46,14 @@ router.post("/", async (req, res) => {
 - Performance improvements
 - Error handling
 - Readability and maintainability
-- Security enhancements
 
-Return ONLY the improved code without any explanations or comments.
 
 Original code:
 ${code}`;
 
     // Get AI suggestion
     const response = await a4fClient.chat.completions.create({
-      model: "provider-3/gpt-5-nano",
+      model: "provider-5/gpt-4o-mini",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.5, // Lower temperature for more deterministic output
       max_tokens: 1500, // Slightly higher token limit
