@@ -12,11 +12,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@huggingface/inference": "^4.13.11",
     "axios": "^1.11.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "openai": "^5.11.0",
     "socket.io": "^4.8.1",
     "uuid": "^11.1.0"
   },
