@@ -13,7 +13,7 @@ CodeSync is a real-time collaborative code editor built with the MERN stack. It 
 - **💻 Real-time Collaboration:** Code with others in real-time using Socket.IO. See cursor positions and edits instantly.
 - **🎨 Multi-Language Support:** Syntax highlighting and execution for **JavaScript, Python, C++, and Java**.
 - **⚡ Live Code Execution:** Run code directly in the browser using the Piston API.
-- **🤖 AI Assistant:** Get code suggestions, optimizations, and bug fixes powered by AI.
+- **🤖 AI Assistant:** Get code suggestions, optimizations, and bug fixes powered by Hugging Face AI.
 - **🌗 Themes:** Choose between Light, VS Dark, and High Contrast Black themes.
 - **🔐 Secure Authentication:** User authentication powered by Clerk.
 - **📱 Responsive Design:** Modern UI built with Tailwind CSS, compatible with various screen sizes.
@@ -35,7 +35,7 @@ CodeSync is a real-time collaborative code editor built with the MERN stack. It 
 - **Runtime:** [Node.js](https://nodejs.org/)
 - **Framework:** [Express.js](https://expressjs.com/)
 - **Real-time:** [Socket.IO](https://socket.io/)
-- **AI Integration:** OpenAI Compatible API (A4F)
+- **AI Integration:** Hugging Face Inference API
 - **Code Execution:** [Piston API](https://github.com/engineer-man/piston)
 
 ---
@@ -67,9 +67,9 @@ npm install
 **Create a `.env` file in the `server` directory:**
 
 ```env
-PORT=3000
+PORT=5000
 ALLOWED_ORIGINS=http://localhost:5173
-A4F_API_KEY=your_a4f_api_key_here
+HUGGINGFACE_API_KEY=your_huggingface_api_key_here
 ```
 
 **Start the Server:**
@@ -81,7 +81,7 @@ npm run server
 # OR Production start
 npm start
 ```
-The server will run on `http://localhost:3000`.
+The server will run on `http://localhost:5000`.
 
 ### 3️⃣ Client Setup
 
@@ -96,7 +96,7 @@ npm install
 **Create a `.env` file in the `client` directory:**
 
 ```env
-VITE_BASE_URL=http://localhost:3000
+VITE_BASE_URL=http://localhost:5000
 VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key_here
 ```
 
@@ -116,16 +116,16 @@ The application will be available at `http://localhost:5173`.
 
 | Variable | Description |
 | :--- | :--- |
-| `VITE_BASE_URL` | URL of the backend server (e.g., `http://localhost:3000`). |
+| `VITE_BASE_URL` | URL of the backend server (e.g., `http://localhost:5000`). |
 | `VITE_CLERK_PUBLISHABLE_KEY` | Public key from your Clerk dashboard. |
 
 ### Server (`server/.env`)
 
 | Variable | Description |
 | :--- | :--- |
-| `PORT` | Port for the backend server (default: `3000`). |
+| `PORT` | Port for the backend server (default: `5000`). |
 | `ALLOWED_ORIGINS` | Comma-separated list of allowed frontend origins (e.g., `http://localhost:5173`). |
-| `A4F_API_KEY` | API Key for the AI service (A4F/OpenAI compatible). |
+| `HUGGINGFACE_API_KEY` | API Key for the Hugging Face Inference API. |
 
 ---
 
