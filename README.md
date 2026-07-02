@@ -1,52 +1,82 @@
-# 🧠 CodeSync - Collaborative Code Editor
+<div align="center">
+  <h1>🧠 CodeSync</h1>
+  <p>A Powerful Real-Time Collaborative Code Editor & Execution Environment</p>
+  
+  [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen.svg)](https://codesync-ai.vercel.app/)
+  [![React](https://img.shields.io/badge/React-19-blue.svg)](https://react.dev/)
+  [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
+  [![Socket.IO](https://img.shields.io/badge/Socket.IO-4.8-black.svg)](https://socket.io/)
+  [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+</div>
 
-CodeSync is a real-time collaborative code editor built with the MERN stack. It empowers developers to code together in real-time, supports multiple programming languages, offers instant code execution, and includes an AI assistant for code optimization.
+<br />
 
-## 🔗 Live Demo
+## 📖 Overview
 
-[**codesync-ai.vercel.app**](https://codesync-ai.vercel.app/)
+CodeSync is a modern, web-based collaborative code editor designed to bring developers together. Built with the robust MERN stack, it enables seamless real-time coding, instant code execution across multiple languages, and AI-powered coding assistance—all within a secure, responsive, and aesthetically pleasing interface.
 
----
+## ✨ Key Features
 
-## ✨ Features
+- **💻 Real-Time Collaboration**: Code simultaneously with your team using robust WebSocket connections (`Socket.IO`). Cursor positions, code edits, and input changes are synced instantly across all users in a room.
+- **⚡ Live Code Execution**: Powered by the [Piston API](https://github.com/engineer-man/piston), securely execute code directly from the browser. Supports **JavaScript (Node.js)**, **Python**, **C++**, and **Java**.
+- **🤖 AI Assistant Integration**: Integrated with the Hugging Face Inference API to provide intelligent code suggestions, bug fixes, and optimization tips right when you need them.
+- **🎨 Advanced Editor Features**: Powered by Monaco Editor (`@monaco-editor/react`), providing a desktop-grade editing experience with syntax highlighting, auto-completion, and multiple themes (Light, VS Dark, High Contrast).
+- **🔐 Secure Authentication**: Integrated user authentication and management powered by [Clerk](https://clerk.com/).
+- **📱 Responsive & Interactive UI**: Built with Tailwind CSS, Framer Motion for smooth animations, and `react-rnd` for draggable/resizable floating windows.
 
-- **💻 Real-time Collaboration:** Code with others in real-time using Socket.IO. See cursor positions and edits instantly.
-- **🎨 Multi-Language Support:** Syntax highlighting and execution for **JavaScript, Python, C++, and Java**.
-- **⚡ Live Code Execution:** Run code directly in the browser using the Piston API.
-- **🤖 AI Assistant:** Get code suggestions, optimizations, and bug fixes powered by Hugging Face AI.
-- **🌗 Themes:** Choose between Light, VS Dark, and High Contrast Black themes.
-- **🔐 Secure Authentication:** User authentication powered by Clerk.
-- **📱 Responsive Design:** Modern UI built with Tailwind CSS, compatible with various screen sizes.
-- **📂 File Handling:** Create, edit, and manage code files securely.
+## 🏗️ Architecture & Tech Stack
 
----
+### Frontend (Client)
+- **Core**: React 19, Vite, React Router DOM
+- **Styling & UI**: Tailwind CSS, Headless UI, Radix UI, Framer Motion, Lucide React
+- **Editor**: Monaco Editor (`@monaco-editor/react`), Shiki Syntax Highlighter
+- **State & Real-time**: Socket.IO Client, Axios for API calls
+- **Auth**: Clerk React SDK
 
-## 🛠️ Tech Stack
+### Backend (Server)
+- **Core**: Node.js, Express.js
+- **Real-time**: Socket.IO with connection state recovery
+- **In-Memory Storage**: Custom RoomManager for managing concurrent collaboration rooms
+- **External APIs**: 
+  - Hugging Face Inference API (`@huggingface/inference`)
+  - Piston Execution Engine
 
-### Frontend
-- **Framework:** [React](https://react.dev/) + [Vite](https://vitejs.dev/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Editor:** [Monaco Editor](https://microsoft.github.io/monaco-editor/) (`@monaco-editor/react`)
-- **Real-time:** [Socket.IO Client](https://socket.io/)
-- **Auth:** [Clerk](https://clerk.com/)
-- **UI Components:** [Lucide React](https://lucide.dev/), [Framer Motion](https://www.framer.com/motion/), [React Hot Toast](https://react-hot-toast.com/)
+## 📂 Project Structure
 
-### Backend
-- **Runtime:** [Node.js](https://nodejs.org/)
-- **Framework:** [Express.js](https://expressjs.com/)
-- **Real-time:** [Socket.IO](https://socket.io/)
-- **AI Integration:** Hugging Face Inference API
-- **Code Execution:** [Piston API](https://github.com/engineer-man/piston)
-
----
+```text
+codesync/
+├── client/                 # Frontend React Application
+│   ├── public/             # Static assets
+│   ├── src/
+│   │   ├── assets/         # Images, icons, etc.
+│   │   ├── components/     # Reusable UI components (Editor, Chat, etc.)
+│   │   ├── pages/          # Route components (Home, Room, etc.)
+│   │   ├── App.jsx         # Main application component
+│   │   └── main.jsx        # Entry point
+│   ├── package.json
+│   ├── tailwind.config.js
+│   └── vite.config.js
+│
+├── server/                 # Backend Node.js Server
+│   ├── inMemorydb/         # In-memory storage logic
+│   │   └── roomManager.js  # Manages active sessions and states
+│   ├── routes/             # Express API routes
+│   │   ├── session.js      # Session handling endpoints
+│   │   └── suggestions.js  # AI suggestion endpoints
+│   ├── server.js           # Main server entry & Socket.IO config
+│   └── package.json
+└── README.md
+```
 
 ## 🚀 Getting Started
 
-Follow these steps to set up the project locally.
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
-- **Node.js**: v18 or higher recommended.
-- **npm** or **yarn**: Package manager.
+
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- `npm`, `yarn`, or `pnpm`
 
 ### 1️⃣ Clone the Repository
 
@@ -55,16 +85,16 @@ git clone https://github.com/yourusername/codesync.git
 cd codesync
 ```
 
-### 2️⃣ Server Setup
+### 2️⃣ Backend Setup (Server)
 
-Open a terminal and navigate to the server directory.
+Navigate to the server directory and install dependencies:
 
 ```bash
 cd server
 npm install
 ```
 
-**Create a `.env` file in the `server` directory:**
+Create a `.env` file in the `server` directory and add the following keys:
 
 ```env
 PORT=5000
@@ -72,75 +102,70 @@ ALLOWED_ORIGINS=http://localhost:5173
 HUGGINGFACE_API_KEY=your_huggingface_api_key_here
 ```
 
-**Start the Server:**
+Start the server:
 
 ```bash
 # Development mode (with nodemon)
 npm run server
 
-# OR Production start
+# Production mode
 npm start
 ```
-The server will run on `http://localhost:5000`.
+*The backend should now be running on `http://localhost:5000`.*
 
-### 3️⃣ Client Setup
+### 3️⃣ Frontend Setup (Client)
 
-Open a new terminal and navigate to the client directory.
+Open a new terminal, navigate to the client directory, and install dependencies:
 
 ```bash
-cd ..
 cd client
 npm install
 ```
 
-**Create a `.env` file in the `client` directory:**
+Create a `.env` file in the `client` directory and add the following keys:
 
 ```env
 VITE_BASE_URL=http://localhost:5000
 VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key_here
 ```
 
-**Start the Client:**
+Start the Vite development server:
 
 ```bash
 npm run dev
 ```
+*The frontend should now be running on `http://localhost:5173`.*
 
-The application will be available at `http://localhost:5173`.
-
----
-
-## 🔑 Environment Variables
+## 🔑 Environment Variables Reference
 
 ### Client (`client/.env`)
-
 | Variable | Description |
 | :--- | :--- |
-| `VITE_BASE_URL` | URL of the backend server (e.g., `http://localhost:5000`). |
-| `VITE_CLERK_PUBLISHABLE_KEY` | Public key from your Clerk dashboard. |
+| `VITE_BASE_URL` | URL of your backend server (e.g., `http://localhost:5000`). |
+| `VITE_CLERK_PUBLISHABLE_KEY` | Public publishable key from your Clerk dashboard. |
 
 ### Server (`server/.env`)
-
 | Variable | Description |
 | :--- | :--- |
 | `PORT` | Port for the backend server (default: `5000`). |
-| `ALLOWED_ORIGINS` | Comma-separated list of allowed frontend origins (e.g., `http://localhost:5173`). |
-| `HUGGINGFACE_API_KEY` | API Key for the Hugging Face Inference API. |
-
----
+| `ALLOWED_ORIGINS` | Comma-separated list of allowed frontend origins for CORS (e.g., `http://localhost:5173`). |
+| `HUGGINGFACE_API_KEY` | API Key for accessing the Hugging Face Inference API for AI suggestions. |
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please follow these steps:
+We welcome contributions! Please follow these steps to contribute:
 
-1. Fork the project.
-2. Create your feature branch: `git checkout -b feature/AmazingFeature`.
-3. Commit your changes: `git commit -m 'Add some AmazingFeature'`.
-4. Push to the branch: `git push origin feature/AmazingFeature`.
-5. Open a Pull Request.
-
----
+1. **Fork** the repository.
+2. **Create a branch**: `git checkout -b feature/AmazingFeature`
+3. **Commit changes**: `git commit -m 'Add some AmazingFeature'`
+4. **Push to branch**: `git push origin feature/AmazingFeature`
+5. **Open a Pull Request** describing your changes.
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+<div align="center">
+  <br />
+  <i>Built with ❤️ by the CodeSync Team</i>
+</div>
