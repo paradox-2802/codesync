@@ -50,16 +50,19 @@ app.get("/health", (req, res) => {
   });
 });
 
-// Piston API configuration
-const PISTON_API_URL = "https://emkc.org/api/v2/piston/execute";
+// Wandbox code execution configuration (free, no API key required)
+const WANDBOX_API_URL =
+  process.env.WANDBOX_API_URL || "https://wandbox.org/api/compile.json";
+
+// Maps app languages to Wandbox compilers
 const LANGUAGE_MAP = {
-  javascript: { language: "javascript", version: "18.15.0" },
-  python: { language: "python", version: "3.10.0" },
-  cpp: { language: "cpp", version: "10.2.0" },
-  java: {
-    language: "java",
-    version: "15.0.2",
+  javascript: { compiler: "nodejs-20.17.0" },
+  python: { compiler: "cpython-3.10.15" },
+  cpp: {
+    compiler: "gcc-13.2.0",
+    extra: { "compiler-option-raw": "-std=c++17" },
   },
+  java: { compiler: "openjdk-jdk-22+36" },
 };
 
 // Socket.io connection handling
@@ -172,22 +175,34 @@ io.on("connection", (socket) => {
       // Update room input
       roomManager.setInput(roomId, input);
 
+      let sourceCode = room.code;
+      if (room.language === "java") {
+        // Wandbox writes the source to prog.java, so a top-level `public class`
+        // fails to compile. Wandbox auto-runs whichever class has main(), so
+        // dropping the `public` modifier makes any Java snippet runnable.
+        sourceCode = sourceCode.replace(
+          /\bpublic\s+((?:(?:final|abstract|sealed|non-sealed|strictfp)\s+)*class\b)/g,
+          "$1"
+        );
+      }
+
       const payload = {
-        language: langConfig.language,
-        version: langConfig.version,
-        files: [{ content: room.code }],
-        stdin: input,
+        code: sourceCode,
+        compiler: langConfig.compiler,
+        stdin: input || "",
+        ...(langConfig.extra || {}),
       };
 
-      const response = await axios.post(PISTON_API_URL, payload);
+      const response = await axios.post(WANDBOX_API_URL, payload, {
+        headers: { "Content-Type": "application/json" },
+      });
       const result = response.data;
 
       // Extract and format output
       const output = [
-        result.run.stdout,
-        result.run.stderr,
-        result.compile?.stdout,
-        result.compile?.stderr,
+        result.compiler_error,
+        result.program_output,
+        result.program_error,
       ]
         .filter(Boolean)
         .join("\n")
