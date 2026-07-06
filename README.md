@@ -18,7 +18,7 @@ CodeSync is a modern, web-based collaborative code editor designed to bring deve
 ## ✨ Key Features
 
 - **💻 Real-Time Collaboration**: Code simultaneously with your team using robust WebSocket connections (`Socket.IO`). Cursor positions, code edits, and input changes are synced instantly across all users in a room.
-- **⚡ Live Code Execution**: Powered by the [Piston API](https://github.com/engineer-man/piston), securely execute code directly from the browser. Supports **JavaScript (Node.js)**, **Python**, **C++**, and **Java**.
+- **⚡ Live Code Execution**: Powered by the [Wandbox API](https://wandbox.org/), securely execute code directly from the browser. Supports **JavaScript (Node.js)**, **Python**, **C++**, and **Java**.
 - **🤖 AI Assistant Integration**: Integrated with the Hugging Face Inference API to provide intelligent code suggestions, bug fixes, and optimization tips right when you need them.
 - **🎨 Advanced Editor Features**: Powered by Monaco Editor (`@monaco-editor/react`), providing a desktop-grade editing experience with syntax highlighting, auto-completion, and multiple themes (Light, VS Dark, High Contrast).
 - **🔐 Secure Authentication**: Integrated user authentication and management powered by [Clerk](https://clerk.com/).
@@ -37,9 +37,9 @@ CodeSync is a modern, web-based collaborative code editor designed to bring deve
 - **Core**: Node.js, Express.js
 - **Real-time**: Socket.IO with connection state recovery
 - **In-Memory Storage**: Custom RoomManager for managing concurrent collaboration rooms
-- **External APIs**: 
+- **External APIs**:
   - Hugging Face Inference API (`@huggingface/inference`)
-  - Piston Execution Engine
+  - Wandbox Execution Engine
 
 ## 📂 Project Structure
 
@@ -100,6 +100,7 @@ Create a `.env` file in the `server` directory and add the following keys:
 PORT=5000
 ALLOWED_ORIGINS=http://localhost:5173
 HUGGINGFACE_API_KEY=your_huggingface_api_key_here
+WANDBOX_API_URL=https://wandbox.org/api/compile.json
 ```
 
 Start the server:
@@ -150,6 +151,7 @@ npm run dev
 | `PORT` | Port for the backend server (default: `5000`). |
 | `ALLOWED_ORIGINS` | Comma-separated list of allowed frontend origins for CORS (e.g., `http://localhost:5173`). |
 | `HUGGINGFACE_API_KEY` | API Key for accessing the Hugging Face Inference API for AI suggestions. |
+| `WANDBOX_API_URL` | Endpoint for the Wandbox code execution API. Optional; defaults to `https://wandbox.org/api/compile.json`. No API key required. |
 
 ## 🤝 Contributing
 
